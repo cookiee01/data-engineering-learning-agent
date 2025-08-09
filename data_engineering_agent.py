@@ -763,7 +763,7 @@ def show_progress_dashboard(agent):
         )
         agent.save_progress(progress)
         st.success("✅ Progress saved!")
-        st.experimental_rerun()
+        st.rerun()
 
 def show_learning_analysis(agent):
     """Show learning analysis page"""
@@ -772,8 +772,8 @@ def show_learning_analysis(agent):
     col1, col2 = st.columns(2)
     
     with col1:
-        week = st.selectbox("Current Week", list(range(1, 7)), value=0)
-        day = st.selectbox("Current Day", list(range(1, 8)), value=0)
+        week = st.selectbox("Current Week", list(range(1, 7)), index=0)
+        day = st.selectbox("Current Day", list(range(1, 8)), index=0)
         
     with col2:
         topic = st.text_input("What are you learning today?",
@@ -806,7 +806,7 @@ def show_code_review(agent):
             "Airflow DAG", "dbt", "Terraform", "Docker",
             "Delta Lake", "Apache Iceberg", "Kafka", "Flink"
         ])
-        week = st.selectbox("Current Week", list(range(1, 7)), value=0)
+        week = st.selectbox("Current Week", list(range(1, 7)), index=0)
         
     with col2:
         learning_objective = st.text_input("Learning Objective",
@@ -833,8 +833,8 @@ def show_practice_scenarios(agent):
     col1, col2 = st.columns(2)
     
     with col1:
-        week = st.selectbox("Week", list(range(1, 7)), value=0)
-        day = st.selectbox("Day", list(range(1, 8)), value=0)
+        week = st.selectbox("Week", list(range(1, 7)), index=0)
+        day = st.selectbox("Day", list(range(1, 8)), index=0)
         
     with col2:
         skill_level = st.selectbox("Your Skill Level:", [
@@ -860,7 +860,7 @@ def show_concept_explanation(agent):
     with col1:
         concept = st.text_input("Concept to explain:",
                               placeholder="e.g., ACID transactions in Delta Lake")
-        week = st.selectbox("Current Week", list(range(1, 7)), value=0)
+        week = st.selectbox("Current Week", list(range(1, 7)), index=0)
         
     with col2:
         current_level = st.selectbox("Your current level with this concept:", [
@@ -885,7 +885,7 @@ def show_skills_assessment(agent):
     """Show skills assessment page"""
     st.header("🏆 Skills Assessment for Current Week")
     
-    week = st.selectbox("Assess skills for Week", list(range(1, 7)), value=0)
+    week = st.selectbox("Assess skills for Week", list(range(1, 7)), index=0)
     week_info = agent.curriculum_structure.get(f"Week {week + 1}", {})
     
     st.write(f"**Week {week + 1}: {week_info.get('title', 'Unknown')}**")
@@ -923,7 +923,7 @@ def show_interview_prep(agent):
     
     with col1:
         weeks_completed = st.selectbox("Weeks of curriculum completed", 
-                                     list(range(1, 7)), value=2)
+                                     list(range(1, 7)), index=2)
         
     with col2:
         focus_area = st.selectbox("Interview focus area:", [
